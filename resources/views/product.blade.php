@@ -1,72 +1,46 @@
 @extends('layout')
 
+@section('css')
+<style>
+
+@media screen and (max-width: 991px){
+.navku{
+  font-size: 10px;
+  margin-left: 5px;
+  margin-right: 5px
+}
+}
+
+</style>
+@stop
+
 @section('navbar')
-<a class="nav-item nav-link font-weight-bold nav-btn" href="{{ url('/Home') }}"><i class="fa-solid fa-house"></i> Home</a>
-<a class="nav-item nav-link font-weight-bold nav-btn active" href="{{ url('/Products') }}"><i class="fa-solid fa-box"></i> Product</a>
-<a class="nav-item nav-link font-weight-bold nav-btn" href="{{ url('/Contact') }}"><i class="fa-solid fa-address-book"></i> Contact Us</a>
+<a class="nav-item nav-link font-weight-bold nav-btn navku" href="{{ url('/Home') }}"><i class="fa-solid fa-house"></i> Home</a>
+<a class="nav-item nav-link font-weight-bold nav-btn navku active" href="{{ url('/Products') }}"><i class="fa-solid fa-box"></i> Product</a>
+<a class="nav-item nav-link font-weight-bold nav-btn navku" href="{{ url('/Contact') }}"><i class="fa-solid fa-address-book"></i> Contact Us</a>
+<a class="nav-item nav-link font-weight-bold nav-btn navku" href="{{ url('/Form-Undian') }}"><i class="fa-solid fa-ticket"></i> Undian</a>
 @stop
 
 @section('isi')
 
-{{-- Produk Row 1--}}
 <div class="row">
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-            <img class="img-fluid" src="{{ url('product/image/sabun.jpeg') }}">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-            <img class="img-fluid" src="{{ url('product/image/sunscreen.jpeg') }}">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <br>
-  {{-- End Produk Row 1 --}}
-
-  {{-- Produk Row 2 --}}
-  <div class="row">
-    <div class="col-sm-4">
-        <div class="card">
-          <div class="card-body">
-            <img class="img-fluid" src="{{ url('product/image/magicscrub.jpeg') }}">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+  @foreach ($produk as $produk)
+  <div class="col-md-6 col-12 mb-4">
+    <div class="card">
+      <div class="card-body">
+          <img class="img-fluid" src="{{ url($produk->imagepath) }}">
+          <h5 class="card-title">{{ $produk->product_name }}</h5>
+          <div>
+            <span style="text-decoration: line-through;">150.000</span>
+            <span> {{ $produk->price }}</span>
           </div>
-        </div>
-      </div>
-    <div class="col-sm-4">
-      <div class="card">
-        <div class="card-body">
-            <img class="img-fluid" src="{{ url('product/image/magicscrubbig.jpeg') }}">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="card">
-        <div class="card-body">
-            <img class="img-fluid" src="{{ url('product/image/glowingspray.jpeg') }}">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
+          <br>
+          <a href="{{ url('Detail-Product')}}/{{ $produk->product_name }}" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> Buy now</a>
       </div>
     </div>
   </div>
-  {{-- End Produk Row 2 --}}
+    
+  @endforeach
+  </div>
 
 @stop

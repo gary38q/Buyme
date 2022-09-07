@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UndianController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,14 +19,18 @@ Route::get('/', function () {
     return redirect('/Home');
 });
 
-Route::get('/Home', function () {
-    return view('home');
-});
+Route::get('/Home', [ProductController::class, 'getallhome']);
 
-Route::get('/Products', function () {
-    return view('product');
-});
+Route::get('/Products', [ProductController::class, 'getallproduct']);
 
 Route::get('/Contact', function () {
     return view('contactus');
 });
+
+Route::get('/Detail-Product/{id}', [ProductController::class, 'getproduct']);
+
+Route::get('/Form-Undian', [UndianController::class, 'showform']);
+
+Route::post('/Insert-Undian', [UndianController::class, 'add_undian']);
+
+Route::get('/generate-random', [UndianController::class, 'generate_random']);

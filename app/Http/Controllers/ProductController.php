@@ -5,82 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\product;
 use App\Http\Requests\StoreproductRequest;
 use App\Http\Requests\UpdateproductRequest;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function getallhome(){
+        $produk = product::all();
+        return view('home',compact('produk'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function getallproduct(){
+        $produk = product::all();
+        return view('product',compact('produk'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreproductRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreproductRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(product $product)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(product $product)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateproductRequest  $request
-     * @param  \App\Models\product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateproductRequest $request, product $product)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(product $product)
-    {
-        //
+    public function getproduct($id){
+        $produk = DB::table('products')->where('product_name','=',$id)->first();
+        return view('detailproduct',compact('produk'));
     }
 }
