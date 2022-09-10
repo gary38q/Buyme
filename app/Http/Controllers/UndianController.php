@@ -52,7 +52,7 @@ class UndianController extends Controller
         $adagak = DB::table('undians')->where('nomor_undian','=', $noundi)->first();
 
         if ($adagak == null){
-            return Redirect::back()->with('error_code', 5);
+            return Redirect::back()->with('error_code', 'tidak_ada');
         }
 
         if ($adagak->tanda == 0){
@@ -70,10 +70,10 @@ class UndianController extends Controller
                 'tanda' => 1
             ]);
 
-            return Redirect::back()->with('error_code', 6);
+            return Redirect::back()->with('error_code', 'success');
         }
         else{
-            return Redirect::back()->with('error_code', 4);
+            return Redirect::back()->with('error_code', 'fail');
         }
         
         return null;

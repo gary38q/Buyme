@@ -40,11 +40,17 @@ input[type=number] {
         <div class="form-group">
             <label>Nama Lengkap</label>
             <input type="text" class="form-control" placeholder="Nama Lengkap" name="nama_lengkap">
+            @error('nama_lengkap')
+                <span class="text-danger">Nama Lengkap Tolong diisi</span>
+            @enderror
         </div>
 
         <div class="form-group">
             <label>Nomor Whatsapp</label>
             <input type="number" class="form-control" placeholder="Nomor Whatsapp" name="nomor_wa">
+            @error('nomor_wa')
+            <span class="text-danger">Nomor Whatsapp Tolong diisi</span>
+        @enderror
         </div>
 
         <div class="form-group">
@@ -84,17 +90,25 @@ input[type=number] {
                     <option value="DI Yogyakarta">DI Yogyakarta</option>
                     <option value="Kalimantan Utara">Kalimantan Utara</option>
                     <option value="Maluku Utara">Maluku Utara</option>
-            </select>
+            </select>@error('provinsi')
+            <span class="text-danger">Provinsi Tolong diisi</span>
+        @enderror
         </div>
 
         <div class="form-group">
             <label>Nomor Undian</label>
             <input type="text" class="form-control" placeholder="Nomor Undian" name="nomor_undian">
+            @error('nomor_undian')
+                <span class="text-danger">Nomor Undian Tolong diisi</span>
+            @enderror
         </div>
 
         <div class="form-group">
             <label>Tanggal Pembelian</label>
             <input type="date" class="form-control" placeholder="Nomor Undian" name="tanggal">
+            @error('tanggal')
+                <span class="text-danger">Tanggal Pembelian Tolong diisi</span>
+            @enderror
         </div>
 
         <button class="btn btn-primary">Submit</button>
@@ -154,7 +168,7 @@ input[type=number] {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
-        @if(!empty(Session::get('error_code')) && Session::get('error_code') == 5)
+        @if(!empty(Session::get('error_code')) && Session::get('error_code') == 'tidak_ada')
         <script>
             var myModal = new bootstrap.Modal(document.getElementById("Modalnotfound"), {});
             document.onreadystatechange = function () {
@@ -163,7 +177,7 @@ input[type=number] {
         </script>
         @endif
 
-        @if(!empty(Session::get('error_code')) && Session::get('error_code') == 6)
+        @if(!empty(Session::get('error_code')) && Session::get('error_code') == 'success')
         <script>
             var myModal = new bootstrap.Modal(document.getElementById("ModalCongrats"), {});
             document.onreadystatechange = function () {
@@ -172,7 +186,7 @@ input[type=number] {
         </script>
         @endif
 
-        @if(!empty(Session::get('error_code')) && Session::get('error_code') == 4)
+        @if(!empty(Session::get('error_code')) && Session::get('error_code') == 'fail')
         <script>
             var myModal = new bootstrap.Modal(document.getElementById("ModalUsed"), {});
             document.onreadystatechange = function () {
