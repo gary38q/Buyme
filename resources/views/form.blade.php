@@ -29,8 +29,8 @@ input[type=number] {
   content: "";
   width: 37.6px;
   height: 37.6px;
-  border: 8px solid #bbdbfc;
-  border-top-color: #0c6cf2;
+  border: 8px solid #f7c9bc;
+  border-top-color: #f68d6f;
   border-radius: 50%;
   animation: loading 1s linear infinite;
 }
@@ -149,7 +149,8 @@ input[type=number] {
       <div class="modal-content" id="contentku" style="display: none">
         <div class="modal-body">
              
-            <a href="#" class="gambarhadiah">
+            <a href="https://wa.me/+6282112916898?text=Halo bestie, aku mau claim voucher belanja :) %0aini Kode Voucher aku ya : (Tolong Diisi) " 
+                target="_blank">
                 <img class="img-fluid" src="{{ url('product/image/voucher.jpg') }}">
             </a>
         </div>
