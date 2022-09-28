@@ -6,6 +6,7 @@ use App\Models\undian;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreundianRequest;
 use App\Http\Requests\UpdateundianRequest;
+use App\Models\hadiah;
 use App\Models\user_hadiah;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -13,15 +14,16 @@ use Illuminate\Support\Facades\Redirect;
 class UndianController extends Controller
 {
     public function showform (){
-        return view('form');
+        $hadiah = hadiah::all();
+        return view('form', compact('hadiah'));
     }
 
     public function generate_random(){
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $banyak = 1;
-    while($banyak !=501){
+    while($banyak != 5000){
     $randomString = '';
-        for ($i = 0; $i < 16; $i++) {
+        for ($i = 0; $i < 11; $i++) {
             $index = rand(0, strlen($characters) - 1);
             $randomString .= $characters[$index];
         }
@@ -52,7 +54,10 @@ class UndianController extends Controller
         $adagak = DB::table('undians')->where('nomor_undian','=', $noundi)->first();
 
         if ($adagak == null){
-            return Redirect::back()->with('error_code', 'tidak_ada');
+            $message="Voucher Tidak Terdaftar";
+            echo "<script type='text/javascript'>alert('$message');     
+            window.location.replace('/undian');
+            </script>";
         }
 
         if ($adagak->tanda == 0){
@@ -61,7 +66,7 @@ class UndianController extends Controller
             $userH->nomor_wa = $validate['nomor_wa'];
             $userH->provinsi = $validate['provinsi'];
             $userH->nomor_undian = $validate['nomor_undian'];
-            $userH->hadiah = "Voucher Sebesar 50 Ribu Rupiah";
+            $userH->hadiah = "Voucher Belanja";
             $userH->tanggal_beli = $validate['tanggal'];
             $userH->save();
 
@@ -73,7 +78,10 @@ class UndianController extends Controller
             return Redirect::back()->with('error_code', 'success');
         }
         else{
-            return Redirect::back()->with('error_code', 'fail');
+            $message="Voucher Sudah Pernah Digunakan";
+            echo "<script type='text/javascript'>alert('$message');     
+            window.location.replace('/undian');
+            </script>";
         }
         
         return null;
